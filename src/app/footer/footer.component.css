@@ -1,0 +1,23 @@
+.bg-darkBlue{
+    background-color: #051021;
+    color: #CBBEAE;
+}
+.bottomImg-wrap{
+    max-width: 100px;
+}
+.bottomImg-wrap img{
+width: 100%;
+}
+
+a , a:focus , a:active{
+    color: #CBBEAE; 
+}
+
+.contact::before,
+.contact::after {
+    display: inline-block;
+    content: "";
+    border-top: 0.1rem solid #CBBEAE;
+    width: 1.3rem;
+    transform: translateY(-50%);
+}

@@ -1,0 +1,12 @@
+.bg-darkBlue{
+    background-color: #08152D;
+}
+.nav-links a , .nav-links a:active, .nav-links a:focus{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+.nav-links span{
+    color: #fff;
+    font-size: 1.2rem;  
+}

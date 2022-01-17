@@ -1,0 +1,31 @@
+<div class="bg">
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-12 col-md-6">
+
+            <form [formGroup]="login" class="w-100 h-100" (ngSubmit)="submitLoginForm(login)">
+            <div class="d-flex flex-column h-100  justify-content-center align-items-end px-lg-5">
+                <div class="login-logo mx-auto">
+                    <img src="../../assets/شعار كبير.svg" alt="logo" class="img-fluid">
+                </div>
+               
+                    <div class="my-3 w-100">
+                        <input type="text" formControlName="name" class="form-control" id="name" placeholder="اسم المستخدم">
+                        <p *ngIf="login.get('name')?.errors != null && login.get('name')?.touched" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                      <div class="mb-3 w-100">
+                        <input formControlName="password" type="password" class="form-control" id="password" placeholder="كلمة المـــــــــــــرور">
+                        <p *ngIf="login.get('password')?.errors != null && login.get('password')?.touched" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                      <div class="alert invalid m-0 p-0" *ngIf="errors">
+                        {{errors}}
+                                    </div>
+                      <button [disabled]="login.invalid" type="submit" class="btn btn-login px-5">دخــــــول</button>
+                      
+                    </div>
+                </form>
+         
+        </div>
+    </div>
+</div>
+</div>

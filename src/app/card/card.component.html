@@ -1,0 +1,50 @@
+
+    <div class="card border-radius h-100 d-flex flex-column justify-content-between">
+
+      <div class="p-1">
+        <img
+          [src]="baseUrl+data.image"
+          [alt]="data.title"
+          class="img-fluid w-100 border-radius" [routerLink]="['/carddetails' ,data.id]"
+        />
+      </div>
+      <div class="px-2">
+          <h6 class="video-title">{{data.title}}</h6>
+          <h6 class="video-title">{{data.id}}</h6>
+          <div class="d-flex align-items-center mb-3 justify-content-between">
+            <span class="video-info__subtitle"> {{data.long_description}} </span>
+            <div class="d-flex align-items-center">
+              <span class="ps-1">{{data.evaluation}}</span>
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+          <div *ngIf="isLogin" class="crudBtns d-flex justify-content-between align-items-center pb-3">
+            <button type="button" class="btn p-0"><i class="fas fa-edit" (click)="show(data)"></i></button>
+            <button type="button" class="btn p-0" ><i class="fas fa-trash-alt danger" (click)="open(content)"></i></button>
+         
+          </div>
+
+      </div>
+   
+    </div>
+
+      
+
+    
+    
+  
+    
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  
+        </button>
+      </div>
+      <div class="modal-body">
+        هل انت متاكد من حذف هذا المحتوى ؟
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)='delete(data.id)'  (click)="modal.close('Save click')">تاكيد</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">اغلاق</button>
+      </div>
+    </ng-template>

@@ -1,0 +1,78 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "vkkv",
+      "imageUrl": "C:\\fakepath\\Vector.png",
+      "videoUrl": "vv",
+      "productionDate": "b",
+      "timePeriod": "fm",
+      "category": "fg",
+      "originalLanguage": "english",
+      "translatedLanguage": "english",
+      "directedBy": "g",
+      "rate": "g",
+      "description": "g",
+      "fileSource": {},
+      "id": 2
+    },
+    {
+      "title": "تاتالبلي",
+      "imageUrl": "C:\\fakepath\\Rectangle 14.png",
+      "videoUrl": "تاتالبلي",
+      "productionDate": "20133",
+      "timePeriod": "40 رححي",
+      "category": "يب",
+      "originalLanguage": "english",
+      "translatedLanguage": "arabic",
+      "directedBy": "يبي",
+      "rate": "يب",
+      "description": "يءيليءل",
+      "fileSource": {},
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "profile": {},
+      "title": "v",
+      "videoUrl": "v",
+      "productionDate": "v",
+      "timePeriod": "v",
+      "category": "v",
+      "originalLanguage": "english",
+      "translatedLanguage": "arabic",
+      "directedBy": "v",
+      "rate": "v",
+      "description": "v",
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "id": 9
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

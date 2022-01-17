@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+html{
+    direction:rtl;
+}
+
+body{
+    background-color: #DEDEDE;
+    font-family: 'Tajawal', sans-serif !important;
+}
+.logo-wrapper{
+    max-width: 110px;
+    width: 20%;
+}
+.search-input{
+    background-color: rgb(220 227 242 / 35%);
+    border: none;
+    padding-right: 1.7rem;
+    color: #fff;
+}
+.fa-search{
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    transform: translateY(-50%) rotate(90deg);
+    color: #fff;
+}
+.circle {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    background-color: #fff;
+  }
+  .dark{
+      background-color: black;
+      color: black;
+  }
+  .pagnation a {
+      text-decoration: none;
+      font-size: 1.3rem;
+  }
+  .invalid{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
+.add-btn, .add-btn:hover, .add-btn:focus{
+    background-color: #081730;
+    color: #fff;
+}

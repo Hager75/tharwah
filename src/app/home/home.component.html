@@ -1,0 +1,19 @@
+<div class="d-flex flex-column" id="main-page">
+    <app-userheader *ngIf="checkUrl(); else elseBlock" [url] = 'url'></app-userheader>
+    <ng-template #elseBlock>
+      <app-header  *ngIf="url !== '/login'"></app-header>
+    </ng-template>
+    <router-outlet></router-outlet>
+    <!-- <div class="container flex-grow-1 mt-4 mb-5">
+          <router-outlet></router-outlet>
+          <div *ngIf="!toggle" class="pt-3 pagnation d-flex justify-content-center align-items-center">
+            <a href="#" class="px-2 text-dark">❮</a>
+            <a class="pagination px-2" href="#"><span class="circle"></span></a>
+            <a class="pagination px-2" href="#"><span class="circle"></span></a>
+            <a class="pagination px-2" href="#"><span class="circle dark"></span></a>
+            <a href="#" class="px-2 text-dark">❯</a>
+          </div>
+    </div> -->
+    <app-footer *ngIf="toggalFooter()" class="mt-auto"></app-footer>
+</div>
+

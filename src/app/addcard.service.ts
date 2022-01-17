@@ -1,0 +1,27 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AddcardService {
+type:string = '';
+  constructor(private _HttpClient:HttpClient) { }
+  addFilmOrProgram(formData:object , type:string):Observable<any>{
+    return this._HttpClient.post(`https://young-inlet-60328.herokuapp.com/api/${type}`, formData)
+  };
+  // https://yourwebsite.com/api/v1/users/$id?_method=PUT
+  getAllFilms():Observable<any>{
+    return this._HttpClient.get(`https://young-inlet-60328.herokuapp.com/api/movies`)
+  };
+  getDetails(id:string , type:string):Observable<any>{
+    return this._HttpClient.get(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`)
+  };
+  deleteMovieOrProgram(id:object , type:string):Observable<any>{
+    return this._HttpClient.delete(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`)
+  };
+  updateMovieOrProgram(id:object , type:string , formData:object ):Observable<any>{
+    return this._HttpClient.put(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`, formData)
+  };
+}

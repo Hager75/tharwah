@@ -1,0 +1,97 @@
+<div class="container-fluid py-3">
+    <div class="row px-5">
+        <div class="col-12 col-md-8 p-0">
+            <!-- <div class="alert alert-danger mt-2" *ngI="error">
+{{error}}
+            </div> -->
+            <form [formGroup]="addCard">
+                <div class="mb-3">
+                    <label for="title" class="form-label">اسم الفيلم / البرنامج</label>
+                    <input formControlName="title" name="title" type="text" class="form-control" id="title">
+                        <p *ngIf="addCard.get('title')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                  </div>
+                  <div class="mb-3 position-relative">
+                    <label for="profile" class="form-label">صورة الفيلم / البرنامج</label>
+                    <input  type="text" class="form-control"  [value]="imagePath" placeholder="اختر صوره">
+                    <input name="image" class="form-control" type="file" accept="image/*" id="profile"  (change)="onFileChange($event)">
+                    <p *ngIf="addCard.get('image')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                    <!-- <label for="formFile" class="form-label">Default file input example</label> -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="video_url" class="form-label">رابطة الفيديو</label>
+                    <input formControlName="video_url" type="text" class="form-control" id="video_url">
+                    <p *ngIf="addCard.get('video_url')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                  </div>
+                  <div class="d-flex mb-3 flex-column flex-sm-row">
+                    <div class="w-3 ps-0 ps-md-2">
+                        <label for="production_year" class="form-label">تاريخ الانتاج</label>
+                        <input formControlName="production_year" type="text" class="form-control" id="production_year">
+                        <p *ngIf="addCard.get('production_year')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                      <div class="w-3 px-0 px-md-2">
+                        <label for="duration" class="form-label">المده الزمنية</label>
+                        <input formControlName="duration" type="text" class="form-control" id="duration">
+                        <p *ngIf="addCard.get('duration')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                      <div class="w-3 pe-0 pe-md-2"> 
+                        <label for="category" class="form-label">نوع الفيلم / البرنامج</label>
+                        <input formControlName="category" type="text" class="form-control" id="category">
+                        <p *ngIf="addCard.get('category')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                  </div>
+             
+              
+                  <div class="d-flex flex-column flex-sm-row">
+                    <div class="w-3 ps-0 ps-md-2 mb-3">
+                      <label for="Original_language" class="form-label">اللغة</label>
+                      <select (change)="changeOriginal_language($event)" class="form-select" aria-label="Default select example" id="Original_language">
+                    
+                        <option value="arabic" >اللغة العربية</option>
+                        <option value="english" [selected]="true">اللغة الانجليزية</option>
+                        <!-- <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
+                      </select>
+                      
+                        <!-- <input formControlName="Original_language" type="text" class="form-control" id="Original_language">
+                        <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
+                      </div>
+                      <div class="w-3 px-0 px-md-2 mb-3">
+                        <label for="subtitle_language" class="form-label">الترجمة</label>
+                        <select (change)="changesubtitle_language($event)" formControlName="subtitle_language" class="form-select" aria-label="Default select example" id="subtitle_language">
+                          <option value="arabic" [selected]="true">اللغة العربية</option>
+                          <option value="english">اللغة الانجليزية</option>
+                          <!-- <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
+                        </select>
+                        <!-- <label for="subtitle_language" class="form-label">الترجمة</label>
+                        <input formControlName="subtitle_language" type="text" class="form-control" id="subtitle_language">
+                        <p *ngIf="addCard.get('subtitle_language')?.errors != null && addCard.get('subtitle_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div> -->
+                    </div>
+                    <div class="w-3 pe-0 pe-md-2 mb-3">
+                        <label for="director" class="form-label">اخراج</label>
+                        <input formControlName="director" type="text" class="form-control" id="director">
+                        <p *ngIf="addCard.get('director')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                      </div>
+                  </div>
+                
+                  <div class="mb-3 w-3 ps-0 ps-md-2">
+                    <label for="evaluation" class="form-label">التقييم</label>
+                    <input formControlName="evaluation" type="text" class="form-control" id="evaluation">
+                    <p *ngIf="addCard.get('evaluation')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                  </div>
+                  <div class="mb-3">
+                    <label for="long_description" class="form-label">وصف الفيلم / البرنامج</label>
+                    <textarea formControlName="long_description" class="form-control resize-none" id="long_description" rows="4"></textarea>
+                    <p *ngIf="addCard.get('long_description')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                  </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="d-flex flex-column h-100 align-items-end justify-content-end">
+                <button type="button" routerLink="/films" class="btn btn-back mb-3 px-5"> <i class="fas fa-arrow-left"></i> رجوع</button>
+                <button type="button" (click)="submitForm(addCard)"  class="btn btn-submit mb-3 px-5" ><i class="fas fa-arrow-up"></i> حفظ</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+

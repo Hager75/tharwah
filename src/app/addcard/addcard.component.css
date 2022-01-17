@@ -1,0 +1,36 @@
+input[type=file]{
+    position: absolute;
+    top:2rem;
+    opacity: 0;
+    /* opacity: 1; */
+    /* transform: translateY(-100%); */
+}
+
+.resize-none{
+    resize: none;
+}
+.btn-back{
+    background-color: rgb(238, 238, 238);
+    border-radius: 2rem;
+    color: #08152D;
+    border: #08152D 1px solid;
+}
+.btn-submit{
+    background-color: #63D0EC;
+    border-radius: 2rem;
+    color: #fff;
+}
+.form-select{
+    background-position: left .75rem center ;
+    padding: .375rem .75rem .375rem 2.25rem;
+   
+}
+.w-3{
+width: calc(100% / 3);
+}
+
+@media screen and (max-width:575px) {
+    .w-3{
+        width: 100%;
+    }
+}

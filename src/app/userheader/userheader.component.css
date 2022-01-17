@@ -1,0 +1,51 @@
+.title{
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+}
+.title h2{
+    font-size: 2.5rem;
+    color: #CBBEAE;
+}
+
+
+.main-btn-wrap{
+    position: absolute;
+    bottom: 4%;
+}
+.btn-style{
+    color: #1C2D50;
+    background-color: #fff;
+    font-stretch: ultra-expanded;
+}
+.btn-style.active{
+    color: #fff;
+    background-color: #617DED;
+}
+
+@media screen and (min-width:1300px) {
+    .title p{
+     font-size: 1.3rem;
+    }
+    .title h2{
+      font-size: 3.3rem;
+    }
+}
+@media screen and (max-width:767px) {
+    .main-btn-wrap{
+        position: static;
+    }
+}
+@media screen and (max-width:600px) {
+    .title{
+        position: static;
+        transform: translateY(0%);
+        color: #1C2D50;
+        text-align: center;
+    }
+    .title h2{
+       color:  #91877d;
+    }
+}

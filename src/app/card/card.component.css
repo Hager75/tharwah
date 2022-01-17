@@ -1,0 +1,16 @@
+.border-radius{
+    border-radius: 2rem;
+}
+.border-radius-2{
+    border-radius: 2.5rem;
+}
+.video-title{
+    font-size: 1rem;
+}
+.video-info__subtitle{
+    font-size: 0.7rem;
+}
+
+.fa-heart , .danger{
+    color: #BE1522;
+}

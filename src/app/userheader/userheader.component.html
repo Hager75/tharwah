@@ -1,0 +1,52 @@
+<div class="position-relative">
+  <img src="../../assets/الواجهة 2ط.png" alt="" class="img-fluid" />
+  <div
+    class="d-flex position-absolute top-0 pt-2 pt-lg-4 justify-content-between align-items-center w-100 px-3 px-lg-5"
+  >
+    <div class="logo-wrapper">
+      <img src="../../assets/الشعار2 .png" alt="" class="img-fluid" />
+    <ul *ngIf="isLogin" class="text-white d-flex justify-content-between mt-1 p-0 list-unstyled">
+      <li role="button">مشرف</li>
+      <li role="button" class="px-2" (click)="logOut()">خروج</li>
+    </ul>
+    </div>
+
+
+    <div class="position-relative w-25">
+      
+      <input
+        class="form-control form-control-sm search-input"
+        type="search"
+        aria-label="Search"
+      />
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+  <div class="title">
+      <h2 class="m-0">THARWAH</h2>
+      <p class="m-0">ثـــروة الفن
+          <span [hidden]="url == '/programs'">.. تخبرنــــا بأشياء
+           <br> تستحق المعـــرفة </span>
+           <span [hidden]="url !== '/programs'">للانتاج الاعلامى
+            <br> .. الفريد </span>
+    </p>
+  </div>
+  <div class="main-btn-wrap d-flex justify-content-center w-100">
+    <button
+      type="button"
+      routerLink="movies"
+      class="btn btn-style w-25 mx-1 py-lg-2"
+      [ngClass]="{'active': url== '/movies' || url =='/'}"
+    >
+      الافلام
+    </button>
+    <button
+      type="button"
+      routerLink="programs"
+      class="btn btn-style w-25 mx-1 py-lg-2"
+      [ngClass]="{'active': url== '/programs'}"
+    >
+      البرامج
+    </button>
+  </div>
+</div>
