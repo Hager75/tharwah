@@ -19,13 +19,16 @@ const routes: Routes = [
   path:'programs', component:ProgramsComponent
 },
   {
-  path:'carddetails/:id', component:CarddetailsComponent
+  path:'carddetails/:type/:id', component:CarddetailsComponent
 },
   {
   path:'login', component:LoginComponent
 },
   {
   path:'add/:type',canActivate:[AuthGuard] ,component:AddcardComponent
+},
+  {
+  path:'add/:type/:id',canActivate:[AuthGuard] ,component:AddcardComponent
 },
 {path: '**', component:NotfoundComponent},
 ];

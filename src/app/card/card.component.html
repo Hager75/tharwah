@@ -5,7 +5,7 @@
         <img
           [src]="baseUrl+data.image"
           [alt]="data.title"
-          class="img-fluid w-100 border-radius" [routerLink]="['/carddetails' ,data.id]"
+          class="img-fluid w-100 border-radius" [routerLink]="['/carddetails',this.type ,data.id]"
         />
       </div>
       <div class="px-2">

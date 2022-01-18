@@ -30,9 +30,14 @@ formDataShow:any = null ;
     
   }
   logOut():Observable<any>{
+    let tempToken = localStorage.getItem('userToken');
     localStorage.removeItem('userToken');
     this.userData.next(null);
-    this._Router.navigate(['/films']);
-    return this._HttpClient.post(`https://young-inlet-60328.herokuapp.com/api/logout`,'')
+    // this._Router.navigate(['/movies']);
+    return this._HttpClient.get(`https://young-inlet-60328.herokuapp.com/api/logout`,{
+      headers:{
+        Authorization: 'Bearer' + tempToken,
+      },
+    })
   }
 }

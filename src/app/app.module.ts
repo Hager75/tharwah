@@ -17,6 +17,7 @@ import { AddcardComponent } from './addcard/addcard.component';
 import { HttpClientModule } from "@angular/common/http";
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DeletemodalComponent } from './deletemodal/deletemodal.component';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -34,7 +35,8 @@ import { DeletemodalComponent } from './deletemodal/deletemodal.component';
     LoginComponent,
     AddcardComponent,
     NotfoundComponent,
-    DeletemodalComponent
+    DeletemodalComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

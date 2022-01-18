@@ -15,7 +15,7 @@ export class CardComponent implements OnInit {
   }
   @Input() data:any  ;
   @Input() type:string = '' ;
-  baseUrl:string = `https://young-inlet-60328.herokuapp.com/api/${this.type}/images/`;
+  baseUrl:string = `https://young-inlet-60328.herokuapp.com/api/type/images/`;
   closeResult = '';
   // imageUrl:string = `https://young-inlet-60328.herokuapp.com/api/movies/images/${this.data.image}` + ;
   ngOnInit(): void {
@@ -26,22 +26,25 @@ export class CardComponent implements OnInit {
         this.isLogin = false ;
       }
     })
+    this.baseUrl = this.baseUrl.replace("type", this.type);    
+
   }
 
   delete(id:any){
-    console.log(id);
+    console.log(this.type);
     
-    // this._AddcardService.deleteMovieOrProgram(data.id,'movies').subscribe((res)=>{
+    this._AddcardService.deleteMovieOrProgram(id,this.type).subscribe((res)=>{
+      alert('sucess');
+      // console.log(res);      
+    //   this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res)=>{
     //   alert('sucess');
-    //   console.log(res);
-      
-    //   this._AddcardService.getAllFilms();
-    // })
+    // });
+    })
   }
   show(data:any){
     console.log(data);
     this._AuthService.formDataShow = data;
-    this._Router.navigate(['/add/movies']);
+    this._Router.navigate(['/add',this.type,data.id]);
   }
 
   open(content:any) {

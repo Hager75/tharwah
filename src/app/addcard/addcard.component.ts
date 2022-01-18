@@ -17,7 +17,7 @@ export class AddcardComponent implements OnInit , OnDestroy {
   isSubmitted: boolean = false;
   addCard: FormGroup = new FormGroup({
     title: new FormControl(null, [Validators.required]),
-    image: new FormControl('hhh', [Validators.required]),
+    image: new FormControl(null, [Validators.required]),
     video_url: new FormControl(null, [Validators.required]),
     production_year: new FormControl(null, [Validators.required]),
     duration: new FormControl(null, [Validators.required]),
@@ -37,20 +37,40 @@ export class AddcardComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit(): void {
-    if(this._AuthService.formDataShow != null){
-      console.log(this._AuthService.formDataShow);
-      this.addCard.controls['title'].setValue(this._AuthService.formDataShow.title);
-      this.addCard.controls['image'].setValue(this._AuthService.formDataShow.image);
-      this.addCard.controls['video_url'].setValue(this._AuthService.formDataShow.video_url);
-      this.addCard.controls['production_year'].setValue(this._AuthService.formDataShow.production_year);
-      this.addCard.controls['duration'].setValue(this._AuthService.formDataShow.duration);
-      this.addCard.controls['category'].setValue(this._AuthService.formDataShow.category);
-      this.addCard.controls['Original_language'].setValue(this._AuthService.formDataShow.Original_language);
-      this.addCard.controls['subtitle_language'].setValue(this._AuthService.formDataShow.subtitle_language);
-      this.addCard.controls['director'].setValue(this._AuthService.formDataShow.director);
-      this.addCard.controls['evaluation'].setValue(this._AuthService.formDataShow.evaluation);
-      this.addCard.controls['long_description'].setValue(this._AuthService.formDataShow.long_description);
+    if(this._ActivatedRoute.snapshot.params.id){
+        this._AddcardService.getDetails(this._ActivatedRoute.snapshot.params.id, this.type).subscribe((res)=>{
+
+console.log(this.type);
+
+      this.addCard.controls['title'].setValue(res.data.title);
+      this.addCard.controls['image'].setValue(res.data.image);
+      this.addCard.controls['video_url'].setValue(res.data.video_url);
+      this.addCard.controls['production_year'].setValue(res.data.production_year);
+      this.addCard.controls['duration'].setValue(res.data.duration);
+      this.addCard.controls['category'].setValue(res.data.category);
+      this.addCard.controls['Original_language'].setValue(res.data.Original_language);
+      this.addCard.controls['subtitle_language'].setValue(res.data.subtitle_language);
+      this.addCard.controls['director'].setValue(res.data.director);
+      this.addCard.controls['evaluation'].setValue(res.data.evaluation);
+      this.addCard.controls['long_description'].setValue(res.data.long_description);
+
+    })
     }
+
+    // if(this._AuthService.formDataShow != null){
+    //   console.log(this._AuthService.formDataShow);
+    //   this.addCard.controls['title'].setValue(this._AuthService.formDataShow.title);
+    //   this.addCard.controls['image'].setValue(this._AuthService.formDataShow.image);
+    //   this.addCard.controls['video_url'].setValue(this._AuthService.formDataShow.video_url);
+    //   this.addCard.controls['production_year'].setValue(this._AuthService.formDataShow.production_year);
+    //   this.addCard.controls['duration'].setValue(this._AuthService.formDataShow.duration);
+    //   this.addCard.controls['category'].setValue(this._AuthService.formDataShow.category);
+    //   this.addCard.controls['Original_language'].setValue(this._AuthService.formDataShow.Original_language);
+    //   this.addCard.controls['subtitle_language'].setValue(this._AuthService.formDataShow.subtitle_language);
+    //   this.addCard.controls['director'].setValue(this._AuthService.formDataShow.director);
+    //   this.addCard.controls['evaluation'].setValue(this._AuthService.formDataShow.evaluation);
+    //   this.addCard.controls['long_description'].setValue(this._AuthService.formDataShow.long_description);
+    // }
   }
   changeOriginal_language($event: any) {
     console.log($event.target.value);
@@ -84,14 +104,13 @@ export class AddcardComponent implements OnInit , OnDestroy {
     // }
     const formData = new FormData();
     formData.append('image', this.addCard.get('image')?.value);
-    console.log(formData);
     console.log(addCard.value);
 
     this.isSubmitted = true;
     if (addCard.valid) {
       const formData = new FormData();
-      // formData.append('image', this.addCard.get('image')?.value);
-      formData.append('image', "اااا");
+      formData.append('image', this.addCard.get('image')?.value);
+      // formData.append('image', "اااا");
       formData.append('title', this.addCard.controls['title'].value);
       formData.append('video_url', this.addCard.controls['video_url'].value);
       formData.append('production_year', this.addCard.controls['production_year'].value);
@@ -101,7 +120,7 @@ export class AddcardComponent implements OnInit , OnDestroy {
       formData.append('subtitle_language', this.addCard.controls['subtitle_language'].value);
       formData.append('director', this.addCard.controls['director'].value);
       formData.append('evaluation', this.addCard.controls['evaluation'].value);
-      formData.append('Original_language', this.addCard.controls['long_description'].value);
+      formData.append('long_description', this.addCard.controls['long_description'].value);
       console.log(this.addCard.get('image')?.value);
       console.log(addCard.value);
 

@@ -17,6 +17,10 @@
     height: 100%;
     background-color: #000;
 }
+.pointer-none{
+    pointer-events: none;
+
+}
 .carddetails__wrap{
     transform: translateY(-5rem);
 }
@@ -44,6 +48,9 @@ max-width: 685px;
     background-color: #63D0EC;
 }
 
+.my-class{
+    background-color:#000 ;
+}
 @media screen and (max-width:767px) {
     .carddetails__wrap{
         transform: translateY(0);
@@ -58,3 +65,33 @@ width: 45%;
         padding-top: 56.25%; 
     }
 }
+.modal-header{
+    border: none;
+}
+.btn-close{
+color:#fff !important;
+background:#63D0EC url('../../assets/download (1).svg') center/1em auto no-repeat;
+opacity:1;
+/* background-color:#63D0EC; */
+border-radius:50%;
+/* width:30px;
+height:30px; */
+/* padding:0.5rem; */
+
+}
+.bg-color{
+    background:#63D0EC
+}
+::ng-deep .modal-content{
+    background-color: transparent;
+    padding: 1rem;
+    /* opacity: 0.88 !important; */
+}
+::ng-deep .modal-dialog  {
+    max-width:none !important ; 
+  }
+ 
+::ng-deep .modal-backdrop{
+      background-color: #08152D;
+      opacity: 0.88 !important;
+  }

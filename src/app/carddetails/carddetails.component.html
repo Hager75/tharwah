@@ -1,15 +1,16 @@
 <div class="flex-grow-1 mb-auto">
-  <div class="iframe-container">
+  <div class="iframe-container" (click)="open(content)">
     <iframe
-      class="responsive-iframe"
+      class="responsive-iframe pointer-none"
       width="100%"
       height="100%"
-      [src]=""
+      src="https://www.youtube.com/embed/5Wiio4KoGe8"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
+      allowfullscreen 
     ></iframe>
+
 
   </div>
   <div class="d-flex flex-column flex-md-row carddetails__wrap px-3 px-lg-5 mt-3 mt-md-0">
@@ -36,3 +37,29 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #content let-modal >
+  <div class="modal-header p-0 d-block text-start mb-2">
+      <button type="button" class="btn-close btn" aria-label="Close" (click)="modal.dismiss('Cross click')">  
+      </button>
+   
+  </div>
+  <div class="modal-body iframe-container">
+    <iframe
+      class="responsive-iframe rounded"
+      width="100%"
+      height="100%"
+      src="https://www.youtube.com/embed/5Wiio4KoGe8"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen 
+    ></iframe>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-danger"   (click)="modal.close('Save click')">تاكيد</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">اغلاق</button>
+  </div> -->
+  
+</ng-template>
