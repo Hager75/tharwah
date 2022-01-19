@@ -1,18 +1,20 @@
 
     <div class="card border-radius h-100 d-flex flex-column justify-content-between">
 
-      <div class="p-1">
+      <div class="p-1 mx-height">
         <img
-          [src]="baseUrl+data.image"
-          [alt]="data.title"
-          class="img-fluid w-100 border-radius" [routerLink]="['/carddetails',this.type ,data.id]"
+        src="../../assets/IMG_20200325_164454~2.jpg"
+        [alt]="data.title"
+        class="img-fluid w-100 border-radius mx-h-100" [routerLink]="['/carddetails',this.type ,data.id]"
         />
+        <!-- [src]="baseUrl+data.image" -->
       </div>
       <div class="px-2">
           <h6 class="video-title">{{data.title}}</h6>
           <h6 class="video-title">{{data.id}}</h6>
           <div class="d-flex align-items-center mb-3 justify-content-between">
-            <span class="video-info__subtitle"> {{data.long_description}} </span>
+            <span class="video-info__subtitle"> {{smallIfo}} </span>
+            <!-- <span class="video-info__subtitle"> {{data.long_description}} </span> -->
             <div class="d-flex align-items-center">
               <span class="ps-1">{{data.evaluation}}</span>
               <i class="fas fa-heart"></i>

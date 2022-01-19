@@ -15,6 +15,8 @@ export class AddcardComponent implements OnInit , OnDestroy {
   imagePath: string = '';
   type:string='';
   isSubmitted: boolean = false;
+  orginalChoosenLanguage:boolean = true; 
+  subtitleChoosenLanguage:boolean = true; 
   addCard: FormGroup = new FormGroup({
     title: new FormControl(null, [Validators.required]),
     image: new FormControl(null, [Validators.required]),
@@ -25,7 +27,7 @@ export class AddcardComponent implements OnInit , OnDestroy {
     Original_language: new FormControl('english', [Validators.required]),
     subtitle_language: new FormControl('arabic', [Validators.required]),
     director: new FormControl(null, [Validators.required]),
-    evaluation: new FormControl(null, [Validators.required]),
+    evaluation: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
     long_description: new FormControl(null, [Validators.required]),
   });
   // this.addCard.controls['Original_language'].setValue(this.default, {onlySelf: true});
@@ -44,12 +46,20 @@ console.log(this.type);
 
       this.addCard.controls['title'].setValue(res.data.title);
       this.addCard.controls['image'].setValue(res.data.image);
+      this.imagePath = this.addCard.controls['image'].value ;      
       this.addCard.controls['video_url'].setValue(res.data.video_url);
       this.addCard.controls['production_year'].setValue(res.data.production_year);
       this.addCard.controls['duration'].setValue(res.data.duration);
       this.addCard.controls['category'].setValue(res.data.category);
       this.addCard.controls['Original_language'].setValue(res.data.Original_language);
+      
+      if(this.addCard.controls['Original_language'].value == 'arabic'){
+        this.orginalChoosenLanguage = false; 
+      }
       this.addCard.controls['subtitle_language'].setValue(res.data.subtitle_language);
+      if(this.addCard.controls['subtitle_language'].value == 'english'){
+        this.subtitleChoosenLanguage = true; 
+      }
       this.addCard.controls['director'].setValue(res.data.director);
       this.addCard.controls['evaluation'].setValue(res.data.evaluation);
       this.addCard.controls['long_description'].setValue(res.data.long_description);
@@ -80,10 +90,9 @@ console.log(this.type);
     console.log($event.target.value);
     this.addCard.controls['subtitle_language'].setValue($event.target.value);
   }
-  getFileName($event: any) {
-    this.imagePath = $event.target.value;
-  }
+
   onFileChange(event: any) {
+    this.imagePath = event.target.files[0].name;
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.addCard.get('image')?.setValue(file , {onlySelf: true});
@@ -104,7 +113,8 @@ console.log(this.type);
     // }
     const formData = new FormData();
     formData.append('image', this.addCard.get('image')?.value);
-    console.log(addCard.value);
+    console.log(addCard.get('evaluation')?.errors);
+   
 
     this.isSubmitted = true;
     if (addCard.valid) {

@@ -46,8 +46,8 @@
                       <label for="Original_language" class="form-label">اللغة</label>
                       <select (change)="changeOriginal_language($event)" class="form-select" aria-label="Default select example" id="Original_language">
                     
-                        <option value="arabic" >اللغة العربية</option>
-                        <option value="english" [selected]="true">اللغة الانجليزية</option>
+                        <option value="arabic" [selected]="!orginalChoosenLanguage">اللغة العربية</option>
+                        <option value="english" [selected]="orginalChoosenLanguage">اللغة الانجليزية</option>
                         <!-- <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
                       </select>
                       
@@ -57,8 +57,8 @@
                       <div class="w-3 px-0 px-md-2 mb-3">
                         <label for="subtitle_language" class="form-label">الترجمة</label>
                         <select (change)="changesubtitle_language($event)" formControlName="subtitle_language" class="form-select" aria-label="Default select example" id="subtitle_language">
-                          <option value="arabic" [selected]="true">اللغة العربية</option>
-                          <option value="english">اللغة الانجليزية</option>
+                          <option value="arabic" [selected]="subtitleChoosenLanguage">اللغة العربية</option>
+                          <option value="english" [selected]="!subtitleChoosenLanguage">اللغة الانجليزية</option>
                           <!-- <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
                         </select>
                         <!-- <label for="subtitle_language" class="form-label">الترجمة</label>
@@ -75,8 +75,9 @@
                 
                   <div class="mb-3 w-3 ps-0 ps-md-2">
                     <label for="evaluation" class="form-label">التقييم</label>
-                    <input formControlName="evaluation" type="text" class="form-control" id="evaluation">
-                    <p *ngIf="addCard.get('evaluation')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                    <input formControlName="evaluation" type="text" min="0" class="form-control" id="evaluation">
+                    <p *ngIf="addCard.get('evaluation')?.errors?.required && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                    <p *ngIf="addCard.get('evaluation')?.errors?.pattern" class="alert invalid m-0 p-0">ارقام فقط</p>
                   </div>
                   <div class="mb-3">
                     <label for="long_description" class="form-label">وصف الفيلم / البرنامج</label>

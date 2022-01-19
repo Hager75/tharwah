@@ -1,5 +1,5 @@
 import { AddcardService } from './../addcard.service';
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit , OnDestroy , DoCheck } from '@angular/core';
 import { AuthService } from './../auth.service';
 
 
@@ -8,7 +8,7 @@ import { AuthService } from './../auth.service';
   templateUrl: './films.component.html',
   styleUrls: ['./films.component.css'],
 })
-export class FilmsComponent implements OnInit , OnDestroy {
+export class FilmsComponent implements OnInit , OnDestroy , DoCheck {
   isLogin: boolean = false;
   films: any;
   type:string ='movies';
@@ -33,9 +33,16 @@ export class FilmsComponent implements OnInit , OnDestroy {
       }
     });
    this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res) => {
-      this.films = res.data;
+      this._AddcardService.films = res.data;
+      this.films = this._AddcardService.films;
+      console.log(this.films);
+      console.log(this._AddcardService.films);
     });
+  }
+  ngDoCheck():void{
+    this.films = this._AddcardService.films;
     console.log(this.films);
+    console.log(this._AddcardService.films);
   }
    ngOnDestroy(): void{
         this.sub.unsubscribe();

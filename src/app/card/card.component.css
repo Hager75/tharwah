@@ -14,3 +14,9 @@
 .fa-heart , .danger{
     color: #BE1522;
 }
+.mx-h-100{
+max-height: 100%;
+}
+.mx-height{
+    max-height: 72%
+}
