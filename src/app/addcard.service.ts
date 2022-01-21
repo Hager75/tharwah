@@ -28,4 +28,5 @@ programs:any[]=[];
   updateMovieOrProgram(id:string , type:string , formData:FormData ):Observable<any>{
     return this._HttpClient.post(`${environment.apiUrl}${type}/${id}`, formData)
   };
+
 }

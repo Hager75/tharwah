@@ -13,13 +13,19 @@
 
 
     <div class="position-relative w-25">
-      
-      <input
+      <form class="sec-form" [formGroup]="searchForm" class="w-100 h-100" (ngSubmit)="searchItems(searchForm)">
+        <input
         class="form-control form-control-sm search-input"
         type="search"
-        aria-label="Search"
+        aria-label="Search" formControlName="search" (keyup)='resetItems($event)'
       />
-      <i class="fas fa-search"></i>
+
+      <button type="submit" id="completed-task" class="fabutton">
+        <i class="fas fa-search" ></i> 
+        
+  </button>
+      </form>
+ 
     </div>
   </div>
   <div class="title">

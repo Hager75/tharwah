@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
+import { FormGroup, FormControl} from '@angular/forms';
+import { SearchService } from './../search.service';
+
 
 @Component({
   selector: 'app-userheader',
@@ -9,7 +12,10 @@ import { AuthService } from './../auth.service';
 export class UserheaderComponent implements OnInit {
   @Input() url:string = '';
   isLogin:boolean = false;
-  constructor(private _AuthService:AuthService) { 
+    searchForm:FormGroup = new FormGroup({
+    search:new FormControl(null),
+  });
+  constructor(private _AuthService:AuthService ,private _SearchService:SearchService) { 
   }
 
   ngOnInit(): void {
@@ -27,5 +33,23 @@ export class UserheaderComponent implements OnInit {
     })
 // this._AuthService.logOut();
   }
-
+searchItems(searchForm:FormGroup){
+  if(searchForm.valid){
+    console.log(searchForm.value);
+    this._SearchService.searchMovieOrProgram(searchForm.value.search , 'movies').subscribe((response)=>{
+      console.log(response.data);
+      this._SearchService.filteredMovies.next(response.data);
+      
+    })
+  }
+}
+resetItems($event:any){
+  console.log($event.target.value);
+  
+if($event.target.value == ''){
+  this._SearchService.filteredMovies.next(null);
+  console.log(this._SearchService.filteredMovies.getValue());
+  
+}
+}
 }

@@ -20,11 +20,15 @@
       >
         البرامج
       </a>
+      
+      <span *ngIf="isLogin" class="text-white mt-1 p-0 list-unstyled">
+        <span>|</span>
+        <span role="button"> مشرف </span>
+
       <span>|</span>
-      <ul *ngIf="isLogin" class="text-white d-flex justify-content-between mt-1 p-0 list-unstyled">
-        <li role="button">مشرف</li>
-        <li role="button" class="px-2" (click)="logOut()">خروج</li>
-      </ul>
+
+        <span role="button" class="px-2" (click)="logOut()">خروج </span>
+      </span>
       <!-- <span>|</span>
       <span> مشرف </span> -->
       </div>

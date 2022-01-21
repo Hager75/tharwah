@@ -24,6 +24,23 @@ body{
     transform: translateY(-50%) rotate(90deg);
     color: #fff;
 }
+.sec-form:focus  .fa-search, .sec-form:active  .fa-search ,.sec-form:hover  .fa-search{
+    color: #617ded;
+
+}
+
+.fabutton {
+    background: none;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    transform: translateY(-50%);
+    width:1rem;
+    height:1rem;
+
+  }
 .circle {
     width: 1rem;
     height: 1rem;

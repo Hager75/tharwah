@@ -7,7 +7,7 @@
     </div>
 
     <p *ngIf= "paginationError">لا يوجد افلام </p>
-    <ngb-pagination [collectionSize]="120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
+    <ngb-pagination [collectionSize]="totalItem || 120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
     class="d-flex justify-content-center pt-3" (pageChange)="displayMovies($event)"></ngb-pagination>
 
 </div>

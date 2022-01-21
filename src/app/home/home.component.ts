@@ -20,15 +20,6 @@ export class HomeComponent implements OnInit {
           (event: NavigationEvent) => {
             if(event instanceof NavigationStart) {  
               this.url = event.url ;
-              // if(event.url == "/carddetails" ){
-              //   this.toggle = true;
-              // }else if(event.url == "/login"){
-              //   this.loginToggle = true;
-
-              // }
-              // else{
-              //   this.toggle = false;
-              // }
             }
           });
    }
