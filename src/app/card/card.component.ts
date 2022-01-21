@@ -22,7 +22,7 @@ export class CardComponent implements OnInit {
   baseUrl:string = `${environment.apiUrl}type/images/`;
   closeResult = '';
   smallIfo:string = '' ;
-
+gg:any[]=[];
   // imageUrl:string = `${environment.apiUrl}movies/images/${this.data.image}` + ;
   ngOnInit(): void {
     this._AuthService.userData.subscribe(()=>{
@@ -43,9 +43,20 @@ export class CardComponent implements OnInit {
      
       this.show = true;
       if(this.type == 'movies'){
-        this._AddcardService.films = this._AddcardService.films.filter(e=> e.id != id);
+        this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res) => {
+      // this._AddcardService.films = res.data;
+      this._AddcardService.films.next(res.data) ;
+        });
+        // this._AddcardService.films = this._AddcardService.films.filter(e=> e.id != id);
+        // this.gg = this._AddcardService.films.getValue();
+        // console.log(this.gg);
+        
+      // this.ggh = this.gg.filter(e=> e.id != id));
+        // this._AddcardService.films.next(this._AddcardService.films.getValue().filter(e=> e.id != id));
+        // this._AddcardService.films.next(this._AddcardService.films.getValue()?.filter(e=> e.id != id));
       }else if (this.type == 'programs'){
-        this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
+        // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
+        // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
       }
       // console.log(res);      
     //   this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res)=>{

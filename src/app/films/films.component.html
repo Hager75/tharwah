@@ -2,12 +2,12 @@
 
 <div class="container flex-grow-1 mt-4 mb-5">
   <button *ngIf="isLogin" type="button" class="btn add-btn mb-3" [routerLink]="['/add','movies']"><i class="fas fa-plus ps-1"></i> اضافة فيلم </button>
-    <div class="row">
+  <div class="row">
         <app-card  class="col-6 col-md-3 col-lg-2 g-2"  *ngFor="let data of films" [data]="data" [type]="type"></app-card>
     </div>
 
     <p *ngIf= "paginationError">لا يوجد افلام </p>
     <ngb-pagination [collectionSize]="totalItem || 120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
     class="d-flex justify-content-center pt-3" (pageChange)="displayMovies($event)"></ngb-pagination>
-
-</div>
+  </div>
+  <app-toast></app-toast>

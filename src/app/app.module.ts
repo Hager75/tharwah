@@ -20,6 +20,7 @@ import { DeletemodalComponent } from './deletemodal/deletemodal.component';
 import { FilterPipe } from './filter.pipe';
 import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ToastComponent } from './toast/toast.component';
 
 
 
@@ -39,7 +40,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     NotfoundComponent,
     DeletemodalComponent,
     FilterPipe,
-    PaginationComponent
+    PaginationComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

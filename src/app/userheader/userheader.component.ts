@@ -37,19 +37,22 @@ searchItems(searchForm:FormGroup){
   if(searchForm.valid){
     console.log(searchForm.value);
     this._SearchService.searchMovieOrProgram(searchForm.value.search , 'movies').subscribe((response)=>{
-      console.log(response.data);
+      if(response.data){
       this._SearchService.filteredMovies.next(response.data);
+      }else if (response.error){
+        this._SearchService.filteredMovies.next(null);
+           this._SearchService.filteredFlag.next(response);
+      }
       
     })
   }
 }
 resetItems($event:any){
   console.log($event.target.value);
-  
-if($event.target.value == ''){
+
+if(!$event.target.value){
   this._SearchService.filteredMovies.next(null);
-  console.log(this._SearchService.filteredMovies.getValue());
-  
+   this._SearchService.filteredFlag.next({});
 }
 }
 }

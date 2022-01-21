@@ -8,6 +8,7 @@ import { environment } from './../environments/environment';
 })
 export class SearchService {
 filteredMovies = new BehaviorSubject(null);
+filteredFlag = new BehaviorSubject<object>({});
   constructor(private _HttpClient:HttpClient) { }
       searchMovieOrProgram(title:string , type:string ):Observable<any>{
     return this._HttpClient.get(`${environment.apiUrl}${type}/search/${title}`)

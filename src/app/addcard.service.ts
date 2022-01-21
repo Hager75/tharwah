@@ -9,8 +9,12 @@ import { environment } from './../environments/environment';
 })
 export class AddcardService {
 type:string = '';
-films:any[]=[];
-programs:any[]=[];
+films= new BehaviorSubject([]);
+programs= new BehaviorSubject(null);
+// films:any[]=[];
+// programs:any[]=[];
+// orignalFilms:any[]=[];
+// orignalPrograms:any[]=[];
   constructor(private _HttpClient:HttpClient) { }
   addFilmOrProgram(formData:FormData , type:string):Observable<any>{
     return this._HttpClient.post(`${environment.apiUrl}${type}`, formData)
