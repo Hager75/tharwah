@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../environments/environment';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-carddetails',
@@ -14,12 +15,14 @@ id:string = '';
 objectDetails:any={};
 type:string = '';
 closeResult = '';
+vidoeUrl: SafeResourceUrl = '';
 baseUrl:string = `${environment.apiUrl}type/images/`;
-  constructor(private _ActivatedRoute:ActivatedRoute , private _AddcardService:AddcardService,private modalService: NgbModal) { }
+  constructor(private _ActivatedRoute:ActivatedRoute , private _AddcardService:AddcardService,private modalService: NgbModal , private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
      this.type = this._ActivatedRoute.snapshot.params.type;
         this.baseUrl = this.baseUrl.replace("type", this.type);    
+
 
     // if(this._AddcardService.type != ''){
     //   this.type = this._AddcardService.type;
@@ -33,6 +36,8 @@ this._AddcardService.getDetails(this.id ,this.type).subscribe((response)=>{
   console.log(this.type);
   
   this.objectDetails = response.data;
+  this.vidoeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/xcSK4-Hrjic');
+console.log(this.objectDetails);
 })
   }
 

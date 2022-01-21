@@ -15,7 +15,6 @@ import { ToastrService } from 'ngx-toastr';
 export class CardComponent implements OnInit {
   isLogin:boolean = false;
     show:boolean = false;
-
   constructor(private _AuthService:AuthService ,private _Router:Router ,private _AddcardService:AddcardService,private modalService: NgbModal,
   private toastr: ToastrService) { 
   }
