@@ -13,7 +13,7 @@
                   <div class="mb-3 position-relative">
                     <label for="profile" class="form-label">صورة الفيلم / البرنامج</label>
                     <input  type="text" class="form-control"  [value]="imagePath" placeholder="اختر صوره">
-                    <input name="image" class="form-control" type="file" accept="image/*" id="profile"  (change)="onFileChange($event)">
+                    <input name="image" class="form-control"  type="file" accept="image/*" id="profile"  (change)="onFileChange($event)">
                     <p *ngIf="addCard.get('image')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
                     <!-- <label for="formFile" class="form-label">Default file input example</label> -->
                   </div>
@@ -88,7 +88,7 @@
         </div>
         <div class="col-12 col-md-4">
             <div class="d-flex flex-column h-100 align-items-end justify-content-end">
-                <button type="button" routerLink="/films" class="btn btn-back mb-3 px-5"> <i class="fas fa-arrow-left"></i> رجوع</button>
+                <button type="button" [routerLink]="['/', type]" class="btn btn-back mb-3 px-5"> <i class="fas fa-arrow-left"></i> رجوع</button>
                 <button type="button" (click)="submitForm(addCard)"  class="btn btn-submit mb-3 px-5" ><i class="fas fa-arrow-up"></i> حفظ</button>
 
             </div>

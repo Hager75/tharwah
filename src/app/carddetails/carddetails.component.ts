@@ -2,6 +2,7 @@ import { AddcardService } from './../addcard.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-carddetails',
@@ -13,7 +14,7 @@ id:string = '';
 objectDetails:any={};
 type:string = '';
 closeResult = '';
-baseUrl:string = `https://young-inlet-60328.herokuapp.com/api/type/images/`;
+baseUrl:string = `${environment.apiUrl}type/images/`;
   constructor(private _ActivatedRoute:ActivatedRoute , private _AddcardService:AddcardService,private modalService: NgbModal) { }
 
   ngOnInit(): void {

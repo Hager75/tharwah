@@ -11,22 +11,12 @@ export class ProgramsComponent implements OnInit {
   isLogin:boolean = false;
     type:string ='programs';
       programs: any;
+  sub:any;
+  totalItem:number = 1 ;
+  paginationError:boolean = false;
+    page = 1;
 
-  // programs:any[]=[
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-4.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-2.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-3.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-4.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-2.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-3.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-4.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-2.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-3.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-4.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-2.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-3.png', info: "فيلم وثائقي عن حياة الملك" , rate:'8.9'},
-  // ]
-  constructor(private _AuthService:AuthService, private _AddcardService:AddcardService) { }
+    constructor(private _AuthService:AuthService, private _AddcardService:AddcardService) { }
 
   ngOnInit(): void {
     this._AuthService.userData.subscribe(()=>{
@@ -36,13 +26,31 @@ export class ProgramsComponent implements OnInit {
         this.isLogin = false ;
       }
     })
-    this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res)=>{
-      this.programs = res.data;
-      console.log(this.type);
+    // this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res)=>{
+    //   this.programs = res.data;
+    //   console.log(this.programs);
       
       
-    })
+    // })
+    this.displayPrograms(1);
+
   }
+  ngDoCheck():void{
+      this.programs = this._AddcardService.programs;
+  }
+   ngOnDestroy(): void{
+        this.sub.unsubscribe();
+   }
+     displayPrograms(pageNum:number){
+        this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type , pageNum).subscribe((res) => {
+      this._AddcardService.programs = res.data;
+      console.log(res);
+      if(res.error){
+        this.paginationError = true ;
+      }
+      this.programs = this._AddcardService.programs;
+    });
+   }
 
 
 }

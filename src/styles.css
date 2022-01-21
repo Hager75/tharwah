@@ -48,3 +48,16 @@ body{
     background-color: #081730;
     color: #fff;
 }
+
+.page-item .page-link{
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    background-color: #fff;
+    text-align:center;
+    color:#617ded;
+}
+.page-item.active .page-link{
+    background-color: #617ded;
+    border-color: #617ded;
+}

@@ -18,6 +18,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DeletemodalComponent } from './deletemodal/deletemodal.component';
 import { FilterPipe } from './filter.pipe';
+import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 
@@ -36,13 +38,18 @@ import { FilterPipe } from './filter.pipe';
     AddcardComponent,
     NotfoundComponent,
     DeletemodalComponent,
-    FilterPipe
+    FilterPipe,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    NgbPaginationModule,
+     NgbAlertModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

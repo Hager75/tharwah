@@ -13,18 +13,17 @@ export class FilmsComponent implements OnInit , OnDestroy , DoCheck {
   films: any;
   type:string ='movies';
   sub:any;
-  // films:any[]=[
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-4.png', info: "فيلم وثائقي عن حياة المل" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-2.png', info: "فيلم وثائقي عن حياة المل" , rate:'8.9'},
-  //   {title:'فيلم المؤسس الأول',imgUrl:'../../assets/b-3.png', info: "فيلم وثائقي عن حياة المل" , rate:'8.9'},
-  // ]
+  totalItem:number = 1 ;
+  paginationError:boolean = false;
+  page = 1;
+
   constructor(
     private _AuthService: AuthService,
     private _AddcardService: AddcardService
   ) {}
 
   ngOnInit(): void {
-    // this._AddcardService.type = 'movies';
+ 
     this._AuthService.userData.subscribe(() => {
       if (this._AuthService.userData.getValue() != null) {
         this.isLogin = true;
@@ -32,19 +31,22 @@ export class FilmsComponent implements OnInit , OnDestroy , DoCheck {
         this.isLogin = false;
       }
     });
-   this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res) => {
-      this._AddcardService.films = res.data;
-      this.films = this._AddcardService.films;
-      console.log(this.films);
-      console.log(this._AddcardService.films);
-    });
+this.displayMovies(1);
   }
   ngDoCheck():void{
-    this.films = this._AddcardService.films;
-    console.log(this.films);
-    console.log(this._AddcardService.films);
+    this.films = this._AddcardService.films;    
   }
    ngOnDestroy(): void{
         this.sub.unsubscribe();
+   }
+   displayMovies(pageNum:number){
+        this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type , pageNum).subscribe((res) => {
+      this._AddcardService.films = res.data;
+      console.log(res);
+      if(res.error){
+        this.paginationError = true ;
+      }
+      this.films = this._AddcardService.films;
+    });
    }
 }

@@ -1,23 +1,4 @@
-<!-- 
 
-<div class="container flex-grow-1 mt-4 mb-5">
-    <div class="row">
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <app-card class="col-6 col-md-3 col-lg-2 g-2"></app-card>
-        <p>programs</p>
-    </div>
-    <div  class="pt-3 pagnation d-flex justify-content-center align-items-center">
-      <a href="#" class="px-2 text-dark">❮</a>
-      <a class="pagination px-2" href="#"><span class="circle"></span></a>
-      <a class="pagination px-2" href="#"><span class="circle"></span></a>
-      <a class="pagination px-2" href="#"><span class="circle dark"></span></a>
-      <a href="#" class="px-2 text-dark">❯</a>
-    </div>
-</div> -->
 
 
 <div class="container flex-grow-1 mt-4 mb-5">
@@ -25,11 +6,7 @@
   <div class="row">
       <app-card  class="col-6 col-md-3 col-lg-2 g-2"  *ngFor="let data of programs" [data]="data" [type]="type"></app-card>
   </div>
-  <div class="pt-3 pagnation d-flex justify-content-center align-items-center">
-    <a href="#" class="px-2 text-dark">❮</a>
-    <a class="pagination px-2" href="#"><span class="circle"></span></a>
-    <a class="pagination px-2" href="#"><span class="circle"></span></a>
-    <a class="pagination px-2" href="#"><span class="circle dark"></span></a>
-    <a href="#" class="px-2 text-dark">❯</a>
-  </div>
+  <p *ngIf= "paginationError">لا يوجد برامج </p>
+  <ngb-pagination [collectionSize]="120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
+  class="d-flex justify-content-center pt-3" (pageChange)="displayPrograms($event)"></ngb-pagination>
 </div>

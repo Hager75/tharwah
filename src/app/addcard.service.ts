@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from './../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +13,19 @@ films:any[]=[];
 programs:any[]=[];
   constructor(private _HttpClient:HttpClient) { }
   addFilmOrProgram(formData:FormData , type:string):Observable<any>{
-    return this._HttpClient.post(`https://young-inlet-60328.herokuapp.com/api/${type}`, formData)
+    return this._HttpClient.post(`${environment.apiUrl}${type}`, formData)
   };
   // https://yourwebsite.com/api/v1/users/$id?_method=PUT
-  getAllFilmsOrPrograms(type:string):Observable<any>{
-    return this._HttpClient.get(`https://young-inlet-60328.herokuapp.com/api/${type}`)
+  getAllFilmsOrPrograms(type:string , pageNum:number):Observable<any>{
+    return this._HttpClient.get(`${environment.apiUrl}${type}`,{params: {page: pageNum}})
   };
   getDetails(id:string , type:string):Observable<any>{
-    return this._HttpClient.get(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`)
+    return this._HttpClient.get(`${environment.apiUrl}${type}/${id}`)
   };
   deleteMovieOrProgram(id:object , type:string):Observable<any>{
-    return this._HttpClient.delete(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`)
+    return this._HttpClient.delete(`${environment.apiUrl}${type}/${id}`)
   };
-  updateMovieOrProgram(id:object , type:string , formData:FormData ):Observable<any>{
-    return this._HttpClient.post(`https://young-inlet-60328.herokuapp.com/api/${type}/${id}`, formData)
+  updateMovieOrProgram(id:string , type:string , formData:FormData ):Observable<any>{
+    return this._HttpClient.post(`${environment.apiUrl}${type}/${id}`, formData)
   };
 }

@@ -20,17 +20,22 @@
       >
         البرامج
       </a>
+      <span>|</span>
+      <ul *ngIf="isLogin" class="text-white d-flex justify-content-between mt-1 p-0 list-unstyled">
+        <li role="button">مشرف</li>
+        <li role="button" class="px-2" (click)="logOut()">خروج</li>
+      </ul>
       <!-- <span>|</span>
       <span> مشرف </span> -->
       </div>
-    <div class="position-relative">
+    <!-- <div class="position-relative">
         <input
           class="form-control form-control-sm search-input"
           type="search"
           aria-label="Search"
         />
         <i class="fas fa-search"></i>
-      </div>
+      </div> -->
   </div>
 
 </div>

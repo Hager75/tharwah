@@ -3,6 +3,7 @@ import { AuthService } from './../auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { AddcardService } from '../addcard.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-card',
@@ -11,15 +12,18 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class CardComponent implements OnInit {
   isLogin:boolean = false;
+  // showMsg:boolean =false;
+    show:boolean = false;
+
   constructor(private _AuthService:AuthService ,private _Router:Router ,private _AddcardService:AddcardService,private modalService: NgbModal) { 
   }
   @Input() data:any  ;
   @Input() type:string = '' ;
-  baseUrl:string = `https://young-inlet-60328.herokuapp.com/api/type/images/`;
+  baseUrl:string = `${environment.apiUrl}type/images/`;
   closeResult = '';
   smallIfo:string = '' ;
 
-  // imageUrl:string = `https://young-inlet-60328.herokuapp.com/api/movies/images/${this.data.image}` + ;
+  // imageUrl:string = `${environment.apiUrl}movies/images/${this.data.image}` + ;
   ngOnInit(): void {
     this._AuthService.userData.subscribe(()=>{
       if(this._AuthService.userData.getValue() != null){
@@ -36,11 +40,12 @@ export class CardComponent implements OnInit {
     console.log(this.type);
     
     this._AddcardService.deleteMovieOrProgram(id,this.type).subscribe((res)=>{
-      alert('sucess');
+     
+      this.show = true;
       if(this.type == 'movies'){
         this._AddcardService.films = this._AddcardService.films.filter(e=> e.id != id);
-        
-        
+      }else if (this.type == 'programs'){
+        this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
       }
       // console.log(res);      
     //   this._AddcardService.getAllFilmsOrPrograms(this.type).subscribe((res)=>{
@@ -48,7 +53,7 @@ export class CardComponent implements OnInit {
     // });
     })
   }
-  show(data:any){
+  showItem(data:any){
     console.log(data);
     this._AuthService.formDataShow = data;
     this._Router.navigate(['/add',this.type,data.id]);

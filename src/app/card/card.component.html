@@ -1,13 +1,16 @@
 
-    <div class="card border-radius h-100 d-flex flex-column justify-content-between">
+    <ngb-toast *ngIf="show" header="Hello">
+      I am a simple static toast with a header.
+    </ngb-toast>
+<div class="card border-radius h-100 d-flex flex-column justify-content-between">
 
       <div class="p-1 mx-height">
         <img
-        src="../../assets/IMG_20200325_164454~2.jpg"
+        [src]="baseUrl+data.image"
         [alt]="data.title"
         class="img-fluid w-100 border-radius mx-h-100" [routerLink]="['/carddetails',this.type ,data.id]"
         />
-        <!-- [src]="baseUrl+data.image" -->
+        <!--  -->
       </div>
       <div class="px-2">
           <h6 class="video-title">{{data.title}}</h6>
@@ -21,7 +24,7 @@
             </div>
           </div>
           <div *ngIf="isLogin" class="crudBtns d-flex justify-content-between align-items-center pb-3">
-            <button type="button" class="btn p-0"><i class="fas fa-edit" (click)="show(data)"></i></button>
+            <button type="button" class="btn p-0"><i class="fas fa-edit" (click)="showItem(data)"></i></button>
             <button type="button" class="btn p-0" ><i class="fas fa-trash-alt danger" (click)="open(content)"></i></button>
          
           </div>
@@ -50,3 +53,4 @@
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">اغلاق</button>
       </div>
     </ng-template>
+

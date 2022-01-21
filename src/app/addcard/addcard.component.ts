@@ -1,8 +1,9 @@
 import { AuthService } from './../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddcardService } from './../addcard.service';
-import { Component, OnInit , OnDestroy} from '@angular/core';
+import { Component, OnInit , OnDestroy  ,ElementRef, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+// import { DOCUMENT } from '@angular/common'; 
 
 
 @Component({
@@ -14,7 +15,9 @@ export class AddcardComponent implements OnInit , OnDestroy {
   error: string = '';
   imagePath: string = '';
   type:string='';
+  id : string = '';
   isSubmitted: boolean = false;
+  isToushed:boolean = false;
   orginalChoosenLanguage:boolean = true; 
   subtitleChoosenLanguage:boolean = true; 
   addCard: FormGroup = new FormGroup({
@@ -31,7 +34,7 @@ export class AddcardComponent implements OnInit , OnDestroy {
     long_description: new FormControl(null, [Validators.required]),
   });
   // this.addCard.controls['Original_language'].setValue(this.default, {onlySelf: true});
-  constructor(public _AddcardService: AddcardService, public _Router: Router, public _ActivatedRoute:ActivatedRoute, private _AuthService:AuthService
+  constructor(public _AddcardService: AddcardService, public _Router: Router, public _ActivatedRoute:ActivatedRoute, private _AuthService:AuthService,
     ) {
    this.type = _ActivatedRoute.snapshot.params.type;
    console.log(this.type);
@@ -40,10 +43,8 @@ export class AddcardComponent implements OnInit , OnDestroy {
 
   ngOnInit(): void {
     if(this._ActivatedRoute.snapshot.params.id){
-        this._AddcardService.getDetails(this._ActivatedRoute.snapshot.params.id, this.type).subscribe((res)=>{
-
-console.log(this.type);
-
+      this.id = this._ActivatedRoute.snapshot.params.id;
+      this._AddcardService.getDetails(this._ActivatedRoute.snapshot.params.id, this.type).subscribe((res)=>{
       this.addCard.controls['title'].setValue(res.data.title);
       this.addCard.controls['image'].setValue(res.data.image);
       this.imagePath = this.addCard.controls['image'].value ;      
@@ -52,7 +53,7 @@ console.log(this.type);
       this.addCard.controls['duration'].setValue(res.data.duration);
       this.addCard.controls['category'].setValue(res.data.category);
       this.addCard.controls['Original_language'].setValue(res.data.Original_language);
-      
+      //  console.log(this.profile.nativeElement.value) ;      
       if(this.addCard.controls['Original_language'].value == 'arabic'){
         this.orginalChoosenLanguage = false; 
       }
@@ -65,6 +66,8 @@ console.log(this.type);
       this.addCard.controls['long_description'].setValue(res.data.long_description);
 
     })
+       console.log(document.getElementById('profile'));
+
     }
 
     // if(this._AuthService.formDataShow != null){
@@ -94,52 +97,44 @@ console.log(this.type);
   onFileChange(event: any) {
     this.imagePath = event.target.files[0].name;
     if (event.target.files.length > 0) {
+      this.isToushed = true ;
       const file = event.target.files[0];
+      console.log(event.target.files[0]);
+
       this.addCard.get('image')?.setValue(file , {onlySelf: true});
     }
   }
   submitForm(addCard: FormGroup) {
-    console.log(addCard.valid);
 
-    // if (addCard.valid) {
-    //   // this._AddcardService.addFilmOrProgram(addCard.value).subscribe((response)=>{
-    //   //   if(response.message == "success"){
-    //   this._Router.navigate(['login']);
-    // }
-    // else{
-    //   this.error = response.errors.message;
-    // }
-    //   })
-    // }
     const formData = new FormData();
     formData.append('image', this.addCard.get('image')?.value);
-    console.log(addCard.get('evaluation')?.errors);
+this.addCard.controls['image'].setValue(this.addCard.get('image')?.value);
    
 
     this.isSubmitted = true;
-    if (addCard.valid) {
-      const formData = new FormData();
-      formData.append('image', this.addCard.get('image')?.value);
-      // formData.append('image', "اااا");
-      formData.append('title', this.addCard.controls['title'].value);
-      formData.append('video_url', this.addCard.controls['video_url'].value);
-      formData.append('production_year', this.addCard.controls['production_year'].value);
-      formData.append('duration', this.addCard.controls['duration'].value);
-      formData.append('category', this.addCard.controls['category'].value);
-      formData.append('Original_language', this.addCard.controls['Original_language'].value);
-      formData.append('subtitle_language', this.addCard.controls['subtitle_language'].value);
-      formData.append('director', this.addCard.controls['director'].value);
-      formData.append('evaluation', this.addCard.controls['evaluation'].value);
-      formData.append('long_description', this.addCard.controls['long_description'].value);
-      console.log(this.addCard.get('image')?.value);
-      console.log(addCard.value);
+    if (addCard.valid && !this._ActivatedRoute.snapshot.params.id) {
+let formData =  this.addDataToFormData();
 
-      this._AddcardService.addFilmOrProgram(formData , 'movies').subscribe(
+      this._AddcardService.addFilmOrProgram(formData , this.type).subscribe(
         (response) => {
           alert('success');
           this.addCard.reset();
           this.isSubmitted = false;
-          // this._Router.navigate(['films']);
+          this._Router.navigate([this.type]);
+        },
+        (error) => {
+          alert('error');
+        }
+      );
+    }else if (addCard.valid && this._ActivatedRoute.snapshot.params.id && this._ActivatedRoute.snapshot.params.type){
+      
+let formData =  this.addDataToFormData();
+      this._AddcardService.updateMovieOrProgram(this.id , this.type , formData).subscribe(
+        (response) => {
+          alert('success');
+          this.addCard.reset();
+          this.isSubmitted = false;
+          this._Router.navigate([this.type]);
         },
         (error) => {
           alert('error');
@@ -150,6 +145,24 @@ console.log(this.type);
   ngOnDestroy() {
     this._AuthService.formDataShow = null ;
   }
+ addDataToFormData(){
+      const formData = new FormData();
+      if(this.isToushed == true){
+      formData.append('image', this.addCard.get('image')?.value);
 
-
+      }
+      formData.append('title', this.addCard.controls['title'].value);
+      formData.append('video_url', this.addCard.controls['video_url'].value);
+      formData.append('production_year', this.addCard.controls['production_year'].value);
+      formData.append('duration', this.addCard.controls['duration'].value);
+      formData.append('category', this.addCard.controls['category'].value);
+      formData.append('Original_language', this.addCard.controls['Original_language'].value);
+      formData.append('subtitle_language', this.addCard.controls['subtitle_language'].value);
+      formData.append('director', this.addCard.controls['director'].value);
+      formData.append('evaluation', this.addCard.controls['evaluation'].value);
+      formData.append('long_description', this.addCard.controls['long_description'].value);
+      console.log(formData);
+      
+      return formData;
+ }
 }
