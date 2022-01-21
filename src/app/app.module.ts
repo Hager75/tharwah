@@ -16,11 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddcardComponent } from './addcard/addcard.component';
 import { HttpClientModule } from "@angular/common/http";
 import { NotfoundComponent } from './notfound/notfound.component';
-import { DeletemodalComponent } from './deletemodal/deletemodal.component';
 import { FilterPipe } from './filter.pipe';
 import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { PaginationComponent } from './pagination/pagination.component';
-import { ToastComponent } from './toast/toast.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -38,10 +37,7 @@ import { ToastComponent } from './toast/toast.component';
     LoginComponent,
     AddcardComponent,
     NotfoundComponent,
-    DeletemodalComponent,
     FilterPipe,
-    PaginationComponent,
-    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +47,8 @@ import { ToastComponent } from './toast/toast.component';
     NgbModule,
     NgbPaginationModule,
      NgbAlertModule,
+     BrowserAnimationsModule,
+      ToastrModule.forRoot(),
 
   ],
   providers: [],

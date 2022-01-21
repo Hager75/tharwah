@@ -5,9 +5,9 @@
   <div class="row">
         <app-card  class="col-6 col-md-3 col-lg-2 g-2"  *ngFor="let data of films" [data]="data" [type]="type"></app-card>
     </div>
-
+  
     <p *ngIf= "paginationError">لا يوجد افلام </p>
     <ngb-pagination [collectionSize]="totalItem || 120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
-    class="d-flex justify-content-center pt-3" (pageChange)="displayMovies($event)"></ngb-pagination>
+    class="d-flex justify-content-center pt-3 py-0" (pageChange)="displayMovies($event)"></ngb-pagination>
   </div>
-  <app-toast></app-toast>
+

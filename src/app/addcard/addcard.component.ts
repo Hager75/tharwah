@@ -4,6 +4,7 @@ import { AddcardService } from './../addcard.service';
 import { Component, OnInit , OnDestroy  ,ElementRef, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 // import { DOCUMENT } from '@angular/common'; 
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class AddcardComponent implements OnInit , OnDestroy {
     long_description: new FormControl(null, [Validators.required]),
   });
   // this.addCard.controls['Original_language'].setValue(this.default, {onlySelf: true});
-  constructor(public _AddcardService: AddcardService, public _Router: Router, public _ActivatedRoute:ActivatedRoute, private _AuthService:AuthService,
+  constructor(public _AddcardService: AddcardService, public _Router: Router, public _ActivatedRoute:ActivatedRoute, private _AuthService:AuthService,private toastr: ToastrService
     ) {
    this.type = _ActivatedRoute.snapshot.params.type;
    console.log(this.type);
@@ -117,27 +118,26 @@ let formData =  this.addDataToFormData();
 
       this._AddcardService.addFilmOrProgram(formData , this.type).subscribe(
         (response) => {
-          alert('success');
+          this.toastr.success('تمت العملية بنجاح', '', {timeOut:3000, closeButton: true, progressBar: true});
           this.addCard.reset();
           this.isSubmitted = false;
           this._Router.navigate([this.type]);
         },
         (error) => {
-          alert('error');
-        }
+this.toastr.error('لم تتم العملية', '', {timeOut:3000, closeButton: true, progressBar: true}); }
       );
     }else if (addCard.valid && this._ActivatedRoute.snapshot.params.id && this._ActivatedRoute.snapshot.params.type){
       
 let formData =  this.addDataToFormData();
       this._AddcardService.updateMovieOrProgram(this.id , this.type , formData).subscribe(
         (response) => {
-          alert('success');
+            this.toastr.success('تمت العملية بنجاح', '', {timeOut:3000, closeButton: true, progressBar: true});
           this.addCard.reset();
           this.isSubmitted = false;
           this._Router.navigate([this.type]);
         },
         (error) => {
-          alert('error');
+          this.toastr.error('لم تتم العملية', '', {timeOut:3000, closeButton: true, progressBar: true});
         }
       );
     }

@@ -29,14 +29,14 @@ export class HomeComponent implements OnInit {
   }
 
   checkUrl():boolean{
-    if(this.url.includes("/carddetails")  || this.url == '/login' || this.url.includes('/add')){
+    if(this.url.includes("/carddetails")  || this.url == '/ElfanArtWWeathTharwah/login' || this.url.includes('/add')){
       this.toggle = false;      
       return this.toggle ;
     }
     return this.toggle = true ;
   }
   toggalFooter():boolean{
-    if(this.url == "/login"){  
+    if(this.url == "/ElfanArtWWeathTharwah/login"){  
       return false ;
     }
     return true ;

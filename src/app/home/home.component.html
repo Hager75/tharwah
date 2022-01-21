@@ -1,7 +1,7 @@
 <div class="d-flex flex-column" id="main-page">
     <app-userheader *ngIf="checkUrl(); else elseBlock" [url] = 'url'></app-userheader>
     <ng-template #elseBlock>
-      <app-header  *ngIf="url !== '/login'"></app-header>
+      <app-header  *ngIf="url !== '/ElfanArtWWeathTharwah/login'"></app-header>
     </ng-template>
     <router-outlet></router-outlet>
     <!-- <div class="container flex-grow-1 mt-4 mb-5">

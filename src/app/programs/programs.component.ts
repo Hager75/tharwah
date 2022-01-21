@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
 import { AddcardService } from './../addcard.service';
+import { SearchService } from './../search.service';
 
 @Component({
   selector: 'app-programs',
@@ -10,13 +11,14 @@ import { AddcardService } from './../addcard.service';
 export class ProgramsComponent implements OnInit {
   isLogin:boolean = false;
     type:string ='programs';
-      programs: any;
+    programs: any;
   sub:any;
-  totalItem:number = 1 ;
+  noPrograms:boolean = false;
+  totalItem:number = 0 ;
   paginationError:boolean = false;
     page = 1;
 
-    constructor(private _AuthService:AuthService, private _AddcardService:AddcardService) { }
+    constructor(private _AuthService:AuthService, private _AddcardService:AddcardService,private _SearchService:SearchService) { }
 
   ngOnInit(): void {
     this._AuthService.userData.subscribe(()=>{
@@ -26,31 +28,42 @@ export class ProgramsComponent implements OnInit {
         this.isLogin = false ;
       }
     })
-    // this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res)=>{
-    //   this.programs = res.data;
-    //   console.log(this.programs);
-      
-      
-    // })
-    this.displayPrograms(1);
 
+    this.displayPrograms(1);
+       this._SearchService.filteredPrograms.subscribe(()=>{
+      if(this._SearchService.filteredPrograms.getValue() != null){
+        this.programs = this._SearchService.filteredPrograms.getValue();
+        this.noPrograms = false;
+        console.log(this.programs); 
+      }else if (this._SearchService.filteredPrograms.getValue() == null && this._SearchService.filteredFlagPro.getValue().hasOwnProperty('error')){
+        this.noPrograms = true;
+      }
+      else{
+         this.programs = this._AddcardService.programs.getValue();
+        this.noPrograms = false;
+
+      }
+    })
   }
-  ngDoCheck():void{
-      this.programs = this._AddcardService.programs;
-  }
+  // ngDoCheck():void{
+  //     this.programs = this._AddcardService.programs;
+  // }
    ngOnDestroy(): void{
         this.sub.unsubscribe();
    }
-     displayPrograms(pageNum:number){
+
+      displayPrograms(pageNum:number){
         this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type , pageNum).subscribe((res) => {
-      this._AddcardService.programs = res.data;
-      console.log(res);
+      this._AddcardService.programs.next(res.data)  ;
+      this.totalItem = res.meta.total;
       if(res.error){
         this.paginationError = true ;
       }
-      this.programs = this._AddcardService.programs;
+       this._AddcardService.programs.subscribe((res)=>{
+      this.programs = this._AddcardService.programs.getValue();
+
+      });
     });
    }
-
 
 }

@@ -4,6 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AddcardService } from '../addcard.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-card',
@@ -12,10 +14,10 @@ import { environment } from '../../environments/environment';
 })
 export class CardComponent implements OnInit {
   isLogin:boolean = false;
-  // showMsg:boolean =false;
     show:boolean = false;
 
-  constructor(private _AuthService:AuthService ,private _Router:Router ,private _AddcardService:AddcardService,private modalService: NgbModal) { 
+  constructor(private _AuthService:AuthService ,private _Router:Router ,private _AddcardService:AddcardService,private modalService: NgbModal,
+  private toastr: ToastrService) { 
   }
   @Input() data:any  ;
   @Input() type:string = '' ;
@@ -23,7 +25,6 @@ export class CardComponent implements OnInit {
   closeResult = '';
   smallIfo:string = '' ;
 gg:any[]=[];
-  // imageUrl:string = `${environment.apiUrl}movies/images/${this.data.image}` + ;
   ngOnInit(): void {
     this._AuthService.userData.subscribe(()=>{
       if(this._AuthService.userData.getValue() != null){
@@ -44,9 +45,9 @@ gg:any[]=[];
       this.show = true;
       if(this.type == 'movies'){
         this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res) => {
-      // this._AddcardService.films = res.data;
       this._AddcardService.films.next(res.data) ;
-        });
+this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000, closeButton: true, progressBar: true});
+});
         // this._AddcardService.films = this._AddcardService.films.filter(e=> e.id != id);
         // this.gg = this._AddcardService.films.getValue();
         // console.log(this.gg);
@@ -55,6 +56,10 @@ gg:any[]=[];
         // this._AddcardService.films.next(this._AddcardService.films.getValue().filter(e=> e.id != id));
         // this._AddcardService.films.next(this._AddcardService.films.getValue()?.filter(e=> e.id != id));
       }else if (this.type == 'programs'){
+                this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res) => {
+      this._AddcardService.programs.next(res.data) ;
+this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000, closeButton: true, progressBar: true});
+});
         // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
         // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
       }

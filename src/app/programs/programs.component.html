@@ -7,6 +7,6 @@
       <app-card  class="col-6 col-md-3 col-lg-2 g-2"  *ngFor="let data of programs" [data]="data" [type]="type"></app-card>
   </div>
   <p *ngIf= "paginationError">لا يوجد برامج </p>
-  <ngb-pagination [collectionSize]="120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
-  class="d-flex justify-content-center pt-3" (pageChange)="displayPrograms($event)"></ngb-pagination>
+  <ngb-pagination [collectionSize]="totalItem || 120" [pageSize]="12" [(page)]="page" [maxSize]="3" [rotate]="true" [ellipses]="false"  aria-label="Default pagination"
+  class="d-flex justify-content-center pt-3 py-0" (pageChange)="displayPrograms($event)"></ngb-pagination>
 </div>

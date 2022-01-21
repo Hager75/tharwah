@@ -10,16 +10,13 @@ import { environment } from './../environments/environment';
 export class AddcardService {
 type:string = '';
 films= new BehaviorSubject([]);
-programs= new BehaviorSubject(null);
-// films:any[]=[];
-// programs:any[]=[];
-// orignalFilms:any[]=[];
-// orignalPrograms:any[]=[];
+flg= new BehaviorSubject<boolean>(false);
+programs= new BehaviorSubject([]);
+
   constructor(private _HttpClient:HttpClient) { }
   addFilmOrProgram(formData:FormData , type:string):Observable<any>{
     return this._HttpClient.post(`${environment.apiUrl}${type}`, formData)
   };
-  // https://yourwebsite.com/api/v1/users/$id?_method=PUT
   getAllFilmsOrPrograms(type:string , pageNum:number):Observable<any>{
     return this._HttpClient.get(`${environment.apiUrl}${type}`,{params: {page: pageNum}})
   };

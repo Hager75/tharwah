@@ -18,7 +18,6 @@ export class FilmsComponent implements OnInit , OnDestroy  {
   totalItem:number =  0;
   paginationError:boolean = false;
   page = 1;
-
   constructor(
     private _AuthService: AuthService,
     private _AddcardService: AddcardService,private _SearchService:SearchService

@@ -22,7 +22,7 @@ const routes: Routes = [
   path:'carddetails/:type/:id', component:CarddetailsComponent
 },
   {
-  path:'login', component:LoginComponent
+  path:'ElfanArtWWeathTharwah/login', component:LoginComponent
 },
   {
   path:'add/:type',canActivate:[AuthGuard] ,component:AddcardComponent
