@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
 import { FormGroup, FormControl} from '@angular/forms';
 import { SearchService } from './../search.service';
-import {  Router ,NavigationStart, Event as NavigationEvent} from '@angular/router';
+import { ActivatedRoute ,Router ,NavigationStart, Event as NavigationEvent} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -20,7 +20,7 @@ export class UserheaderComponent implements OnInit {
     searchForm:FormGroup = new FormGroup({
     search:new FormControl(null),
   });
-  constructor(private _AuthService:AuthService ,private _SearchService:SearchService,private router: Router) { 
+  constructor(private _AuthService:AuthService ,private _SearchService:SearchService,private router: Router, private _ActivatedRoute:ActivatedRoute) { 
 
     this.event$ =this.router.events
         .subscribe(
@@ -28,9 +28,10 @@ export class UserheaderComponent implements OnInit {
             if(event instanceof NavigationStart) {  
               this.type = event.url.substring(1);
               console.log(this.type);
-              this.clearInput()
             }
           });
+         
+          
   }
 
   ngOnInit(): void {
@@ -53,7 +54,10 @@ export class UserheaderComponent implements OnInit {
 searchItems(searchForm:FormGroup){
   if(searchForm.valid){
     console.log(searchForm.value);
-    if(this.type == 'movies'){
+    console.log(this.type);
+    
+    if(this.type == 'movies' || this.type == ''){
+      this.type = 'movies' ;
     this._SearchService.searchMovieOrProgram(searchForm.value.search , this.type).subscribe((response)=>{
       if(response.data){
       this._SearchService.filteredMovies.next(response.data);
@@ -89,7 +93,5 @@ if(!$event.target.value){
    this._SearchService.filteredFlagPro.next({});
 }
 }
-clearInput(){
-  return '';
-}
+
 }

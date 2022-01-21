@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
     }
       },(error)=>{
         console.log(error);
-        this.errors = error.error.message;
+        // this.errors = error.error.message;
+        this.errors = 'اسم المستخدم او كلمة المرور خاطئة';
 
       })
     }
