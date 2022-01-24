@@ -15,7 +15,6 @@ id:string = '';
 objectDetails:any={};
 type:string = '';
 closeResult = '';
-vidoeUrl: SafeResourceUrl = '';
 baseUrl:string = `${environment.apiUrl}type/images/`;
   constructor(private _ActivatedRoute:ActivatedRoute , private _AddcardService:AddcardService,private modalService: NgbModal , private sanitizer: DomSanitizer) { }
 
@@ -24,21 +23,13 @@ baseUrl:string = `${environment.apiUrl}type/images/`;
         this.baseUrl = this.baseUrl.replace("type", this.type);    
 
 
-    // if(this._AddcardService.type != ''){
-    //   this.type = this._AddcardService.type;
-    //   console.log(this.type);
-    // }
+
 this.id=this._ActivatedRoute.snapshot.params.id;
-console.log(this.id);
 
 this._AddcardService.getDetails(this.id ,this.type).subscribe((response)=>{
-  console.log(response.data);
-  console.log(this.type);
   
   this.objectDetails = response.data;
-  this.vidoeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/xcSK4-Hrjic');
-console.log(this.objectDetails);
-})
+},(error=>{}))
   }
 
   open(content:any) {

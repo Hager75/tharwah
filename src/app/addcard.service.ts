@@ -18,7 +18,8 @@ programs= new BehaviorSubject([]);
     return this._HttpClient.post(`${environment.apiUrl}${type}`, formData)
   };
   getAllFilmsOrPrograms(type:string , pageNum:number):Observable<any>{
-    return this._HttpClient.get(`${environment.apiUrl}${type}`,{params: {page: pageNum}})
+    return this._HttpClient.get(`${environment.apiUrl}${type}`,{params: {page: pageNum}}
+    )
   };
   getDetails(id:string , type:string):Observable<any>{
     return this._HttpClient.get(`${environment.apiUrl}${type}/${id}`)
