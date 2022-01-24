@@ -38,7 +38,6 @@ this.displayMovies(1);
       if(this._SearchService.filteredMovies.getValue() != null){
         this.films = this._SearchService.filteredMovies.getValue();
         this.noFilms = false;
-        console.log(this.films); 
       }else if (this._SearchService.filteredMovies.getValue() == null && this._SearchService.filteredFlag.getValue().hasOwnProperty('error')){
         this.noFilms = true;
       }
@@ -64,9 +63,8 @@ this.displayMovies(1);
       }
        this._AddcardService.films.subscribe((res)=>{
       this.films = this._AddcardService.films.getValue();
-
-      });
-    });
+      },(error=>{}));
+    },(error=>{}));
    }
   //  displayMovies(pageNum:number){
   //       this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type , pageNum).subscribe((res) => {

@@ -27,7 +27,6 @@ export class UserheaderComponent implements OnInit {
           (event: NavigationEvent) => {
             if(event instanceof NavigationStart) {  
               this.type = event.url.substring(1);
-              console.log(this.type);
             }
           });
          
@@ -35,7 +34,6 @@ export class UserheaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.type);
     
     this._AuthService.userData.subscribe(()=>{
       if(this._AuthService.userData.getValue() != null){
@@ -47,14 +45,12 @@ export class UserheaderComponent implements OnInit {
   }
   logOut(){
     this._AuthService.logOut().subscribe((response)=>{
-      console.log(response);
-    })
+    },(error=>{}))
 // this._AuthService.logOut();
   }
 searchItems(searchForm:FormGroup){
   if(searchForm.valid){
-    console.log(searchForm.value);
-    console.log(this.type);
+
     
     if(this.type == 'movies' || this.type == ''){
       this.type = 'movies' ;
@@ -66,25 +62,23 @@ searchItems(searchForm:FormGroup){
            this._SearchService.filteredFlag.next(response);
       }
       
-    })
+    },(error=>{}))
     }else if (this.type == 'programs'){
     this._SearchService.searchMovieOrProgram(searchForm.value.search , this.type).subscribe((response)=>{
       if(response.data){
       this._SearchService.filteredPrograms.next(response.data);
-      console.log(response);
       
       }else if (response.error){
         this._SearchService.filteredPrograms.next(null);
            this._SearchService.filteredFlagPro.next(response);
       }
       
-    })
+    },(error=>{}))
     }
 
   }
 }
 resetItems($event:any){
-  console.log($event.target.value);
 
 if(!$event.target.value){
   this._SearchService.filteredMovies.next(null);

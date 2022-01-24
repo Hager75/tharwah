@@ -37,7 +37,7 @@ gg:any[]=[];
   }
 
   delete(id:any){
-    console.log(this.type);
+
     
     this._AddcardService.deleteMovieOrProgram(id,this.type).subscribe((res)=>{
      
@@ -45,8 +45,11 @@ gg:any[]=[];
       if(this.type == 'movies'){
         this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res) => {
       this._AddcardService.films.next(res.data) ;
-this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000, closeButton: true, progressBar: true});
-});
+this.toastr.success('تمت العملية بنجاح', '', {timeOut:3000, closeButton: true, progressBar: true});
+},(error=>{
+  this.toastr.error('لم تتم العملية', '', {timeOut:3000, closeButton: true, progressBar: true});
+
+}));
         // this._AddcardService.films = this._AddcardService.films.filter(e=> e.id != id);
         // this.gg = this._AddcardService.films.getValue();
         // console.log(this.gg);
@@ -57,8 +60,11 @@ this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000
       }else if (this.type == 'programs'){
                 this._AddcardService.getAllFilmsOrPrograms(this.type , 1).subscribe((res) => {
       this._AddcardService.programs.next(res.data) ;
-this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000, closeButton: true, progressBar: true});
-});
+this.toastr.success('تمت العملية بنجاح', '', {timeOut:3000, closeButton: true, progressBar: true});
+},(error=>{
+  this.toastr.error('لم تتم العملية', '', {timeOut:3000, closeButton: true, progressBar: true});
+
+}));
         // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
         // this._AddcardService.programs = this._AddcardService.programs.filter(e=> e.id != id);
       }
@@ -69,7 +75,6 @@ this.toastr.success('تمت العملية بنجاح', 'success', {timeOut:3000
     })
   }
   showItem(data:any){
-    console.log(data);
     this._AuthService.formDataShow = data;
     this._Router.navigate(['/add',this.type,data.id]);
   }

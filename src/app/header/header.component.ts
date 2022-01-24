@@ -23,10 +23,9 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this._AuthService.logOut().subscribe((response)=>{
-      // console.log(response);
           this._Router.navigate(['/movies']);
 
-    })
+    },(error=>{}))
 // this._AuthService.logOut();
   }
 

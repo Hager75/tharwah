@@ -34,7 +34,6 @@ export class ProgramsComponent implements OnInit {
       if(this._SearchService.filteredPrograms.getValue() != null){
         this.programs = this._SearchService.filteredPrograms.getValue();
         this.noPrograms = false;
-        console.log(this.programs); 
       }else if (this._SearchService.filteredPrograms.getValue() == null && this._SearchService.filteredFlagPro.getValue().hasOwnProperty('error')){
         this.noPrograms = true;
       }
@@ -62,8 +61,8 @@ export class ProgramsComponent implements OnInit {
        this._AddcardService.programs.subscribe((res)=>{
       this.programs = this._AddcardService.programs.getValue();
 
-      });
-    });
+      },(error=>{}));
+    },(error=>{}));
    }
 
 }

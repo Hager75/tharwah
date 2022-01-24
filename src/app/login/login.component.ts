@@ -23,18 +23,13 @@ export class LoginComponent implements OnInit {
   }
   submitLoginForm(login: FormGroup) {
     if (login.valid) {
-      // console.log(login.value)
       this._AuthService.login(login.value).subscribe((response)=>{
-        console.log(response.message);
         if(response.token){
         localStorage.setItem('userToken', response.token);
-        // localStorage.setItem('userToken', 'true');
         this._AuthService.saveUserData();
       this._Router.navigate(['movies']);
     }
       },(error)=>{
-        console.log(error);
-        // this.errors = error.error.message;
         this.errors = 'اسم المستخدم او كلمة المرور خاطئة';
 
       })

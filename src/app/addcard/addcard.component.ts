@@ -38,7 +38,6 @@ export class AddcardComponent implements OnInit , OnDestroy {
   constructor(public _AddcardService: AddcardService, public _Router: Router, public _ActivatedRoute:ActivatedRoute, private _AuthService:AuthService,private toastr: ToastrService
     ) {
    this.type = _ActivatedRoute.snapshot.params.type;
-   console.log(this.type);
    
   }
 
@@ -66,32 +65,18 @@ export class AddcardComponent implements OnInit , OnDestroy {
       this.addCard.controls['evaluation'].setValue(res.data.evaluation);
       this.addCard.controls['long_description'].setValue(res.data.long_description);
 
-    })
-       console.log(document.getElementById('profile'));
+    },(error=>{
+      // this.toastr.error('لم تتم العملية', '', {timeOut:3000, closeButton: true, progressBar: true});
+    }))
 
     }
 
-    // if(this._AuthService.formDataShow != null){
-    //   console.log(this._AuthService.formDataShow);
-    //   this.addCard.controls['title'].setValue(this._AuthService.formDataShow.title);
-    //   this.addCard.controls['image'].setValue(this._AuthService.formDataShow.image);
-    //   this.addCard.controls['video_url'].setValue(this._AuthService.formDataShow.video_url);
-    //   this.addCard.controls['production_year'].setValue(this._AuthService.formDataShow.production_year);
-    //   this.addCard.controls['duration'].setValue(this._AuthService.formDataShow.duration);
-    //   this.addCard.controls['category'].setValue(this._AuthService.formDataShow.category);
-    //   this.addCard.controls['Original_language'].setValue(this._AuthService.formDataShow.Original_language);
-    //   this.addCard.controls['subtitle_language'].setValue(this._AuthService.formDataShow.subtitle_language);
-    //   this.addCard.controls['director'].setValue(this._AuthService.formDataShow.director);
-    //   this.addCard.controls['evaluation'].setValue(this._AuthService.formDataShow.evaluation);
-    //   this.addCard.controls['long_description'].setValue(this._AuthService.formDataShow.long_description);
-    // }
+
   }
   changeOriginal_language($event: any) {
-    console.log($event.target.value);
     this.addCard.controls['Original_language'].setValue($event.target.value);
   }
   changesubtitle_language($event: any) {
-    console.log($event.target.value);
     this.addCard.controls['subtitle_language'].setValue($event.target.value);
   }
 
@@ -100,7 +85,6 @@ export class AddcardComponent implements OnInit , OnDestroy {
     if (event.target.files.length > 0) {
       this.isToushed = true ;
       const file = event.target.files[0];
-      console.log(event.target.files[0]);
 
       this.addCard.get('image')?.setValue(file , {onlySelf: true});
     }
@@ -161,7 +145,6 @@ let formData =  this.addDataToFormData();
       formData.append('director', this.addCard.controls['director'].value);
       formData.append('evaluation', this.addCard.controls['evaluation'].value);
       formData.append('long_description', this.addCard.controls['long_description'].value);
-      console.log(formData);
       
       return formData;
  }
