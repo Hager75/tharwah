@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Location } from "@angular/common";
 
+
 @Component({
   selector: 'app-carddetails',
   templateUrl: './carddetails.component.html',
@@ -26,8 +27,11 @@ export class CarddetailsComponent implements OnInit, OnDestroy {
     this.type = this._ActivatedRoute.snapshot.params.type;
     this.baseUrl = this.baseUrl.replace("type", this.type);
     this.location.subscribe(event => {
+      console.log(event);
+      
       this._Router.navigate(['/',this.type]);
     });
+
     this.id = this._ActivatedRoute.snapshot.params.id;
     this.sub = this._AddcardService.getDetails(this.id, this.type).subscribe((response) => {
       this.objectDetails = response.data;

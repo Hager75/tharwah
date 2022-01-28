@@ -78,7 +78,6 @@ export class AddcardComponent implements OnInit, OnDestroy {
             this.addCard.controls['Original_language'].setValue(
               res.data.Original_language
             );
-            //  console.log(this.profile.nativeElement.value) ;
             if (this.addCard.controls['Original_language'].value == 'العربية') {
               this.orginalChoosenLanguage = false;
             }
@@ -123,7 +122,6 @@ export class AddcardComponent implements OnInit, OnDestroy {
     }
   }
   submitForm(addCard: FormGroup) {
-    console.log(addCard.value);
     this.largeFile = false;
     const formData = new FormData();
     formData.append('image', this.addCard.get('image')?.value);
