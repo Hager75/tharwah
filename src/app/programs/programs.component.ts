@@ -10,8 +10,8 @@ import { SearchService } from './../search.service';
 })
 export class ProgramsComponent implements OnInit {
   isLogin:boolean = false;
-    type:string ='programs';
-    programs: any;
+  type:string ='programs';
+  programs: any;
   sub:any;
   noPrograms:boolean = false;
   totalItem:number = 0 ;
@@ -53,9 +53,10 @@ export class ProgramsComponent implements OnInit {
 
       displayPrograms(pageNum:number){
         this.sub = this._AddcardService.getAllFilmsOrPrograms(this.type , pageNum).subscribe((res) => {
-      this._AddcardService.programs.next(res.data)  ;
-      this.totalItem = res.meta.total;
-      if(res.error){
+      if(!res.error){
+        this._AddcardService.programs.next(res.data)  ;
+        this.totalItem = res.meta.total;
+      }else if(res.error || this.totalItem == 0){
         this.paginationError = true ;
       }
        this._AddcardService.programs.subscribe((res)=>{

@@ -15,6 +15,7 @@
                     <input  type="text" class="form-control"  [value]="imagePath" placeholder="اختر صوره">
                     <input name="image" class="form-control"  type="file" accept="image/*" id="profile"  (change)="onFileChange($event)">
                     <p *ngIf="addCard.get('image')?.errors != null && isSubmitted" class="alert invalid m-0 p-0">مطلوب</p>
+                    <p *ngIf="largeFile" class="alert invalid m-0 p-0">اقصى حجم للصورة 15 ميجا </p>
                     <!-- <label for="formFile" class="form-label">Default file input example</label> -->
                   </div>
                   <div class="mb-3">

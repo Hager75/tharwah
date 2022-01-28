@@ -25,7 +25,9 @@ programs= new BehaviorSubject([]);
     return this._HttpClient.get(`${environment.apiUrl}${type}/${id}`)
   };
   deleteMovieOrProgram(id:object , type:string):Observable<any>{
-    return this._HttpClient.delete(`${environment.apiUrl}${type}/${id}`)
+    const formData = new FormData();
+    formData.append('_method','delete'); 
+    return this._HttpClient.post(`${environment.apiUrl}${type}/${id}`, formData);
   };
   updateMovieOrProgram(id:string , type:string , formData:FormData ):Observable<any>{
     return this._HttpClient.post(`${environment.apiUrl}${type}/${id}`, formData)

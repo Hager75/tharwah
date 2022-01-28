@@ -28,10 +28,14 @@
     color: #fff;
     font-size: 2.5rem;
 }
+
 .carddetails__img{
     border-radius: 1.8rem;
     overflow: hidden;
     max-width: 285px;
+}
+.carddetails__img img{
+    border-radius: 1.8rem;
 }
 .rate-wrap{
     background-color: #63D0EC;
@@ -82,16 +86,16 @@ height:30px; */
 .bg-color{
     background:#63D0EC
 }
-::ng-deep .modal-content{
+::ng-deep .custom-class .modal-content{
     background-color: transparent;
     padding: 1rem;
     /* opacity: 0.88 !important; */
 }
-::ng-deep .modal-dialog  {
+::ng-deep .custom-class .modal-dialog  {
     max-width:none !important ; 
   }
  
-::ng-deep .modal-backdrop{
+::ng-deep .custom-class .modal-backdrop{
       background-color: #08152D;
       opacity: 0.88 !important;
   }

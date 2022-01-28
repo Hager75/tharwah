@@ -18,7 +18,9 @@ body{
     border: none;
     padding-right: 2rem;
     color: #fff;
+    /* transition: all 1s; */
 }
+
 .fa-search{
     position: absolute;
     top: 50%;
@@ -86,3 +88,4 @@ body{
 .pagination{
     padding:0;
 }
+

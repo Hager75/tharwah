@@ -18,7 +18,7 @@ formDataShow:any = null ;
     }
   }
   
-  login(formData:object):Observable<any>{
+  login(formData:FormData):Observable<any>{
     return this._HttpClient.post(`${environment.apiUrl}login`, formData)
   }
   saveUserData(){
@@ -26,10 +26,7 @@ formDataShow:any = null ;
     // this.userData = jwtDecode(encodedUserData);
     
     let encodedUserData:any = JSON.stringify(localStorage.getItem('userToken'));
-    // this.userData = jwtDecode(encodedUserData); 
     this.userData.next(encodedUserData); 
-    // this.userData.next(jwtDecode(encodedUserData));  
-    console.log(this.userData);
     
   }
   logOut():Observable<any>{

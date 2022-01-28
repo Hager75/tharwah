@@ -23,7 +23,10 @@ export class LoginComponent implements OnInit {
   }
   submitLoginForm(login: FormGroup) {
     if (login.valid) {
-      this._AuthService.login(login.value).subscribe((response)=>{
+      const formData = new FormData();
+      formData.append('name', this.login.controls['name'].value);
+      formData.append('password', this.login.controls['password'].value);
+      this._AuthService.login(formData).subscribe((response)=>{
         if(response.token){
         localStorage.setItem('userToken', response.token);
         this._AuthService.saveUserData();

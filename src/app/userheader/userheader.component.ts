@@ -46,7 +46,6 @@ export class UserheaderComponent implements OnInit {
   logOut(){
     this._AuthService.logOut().subscribe((response)=>{
     },(error=>{}))
-// this._AuthService.logOut();
   }
 searchItems(searchForm:FormGroup){
   if(searchForm.valid){
