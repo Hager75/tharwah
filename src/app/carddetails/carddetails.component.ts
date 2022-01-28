@@ -27,7 +27,7 @@ export class CarddetailsComponent implements OnInit, OnDestroy {
     this.type = this._ActivatedRoute.snapshot.params.type;
     this.baseUrl = this.baseUrl.replace("type", this.type);
     this.location.subscribe(event => {
-      console.log(event);
+      // console.log(event);
       
       this._Router.navigate(['/',this.type]);
     });
