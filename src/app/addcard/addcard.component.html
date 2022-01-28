@@ -58,14 +58,10 @@
                       <div class="w-3 px-0 px-md-2 mb-3">
                         <label for="subtitle_language" class="form-label">الترجمة</label>
                         <select (change)="changesubtitle_language($event)" formControlName="subtitle_language" class="form-select" aria-label="Default select example" id="subtitle_language">
-                          <option value="arabic" [selected]="subtitleChoosenLanguage">اللغة العربية</option>
-                          <option value="english" [selected]="!subtitleChoosenLanguage">اللغة الانجليزية</option>
-                          <!-- <p *ngIf="addCard.get('Original_language')?.errors != null && addCard.get('Original_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p> -->
+                          <option value="العربية" [selected]="subtitleChoosenLanguage">اللغة العربية</option>
+                          <option value="الانجليزية" [selected]="!subtitleChoosenLanguage">اللغة الانجليزية</option>
                         </select>
-                        <!-- <label for="subtitle_language" class="form-label">الترجمة</label>
-                        <input formControlName="subtitle_language" type="text" class="form-control" id="subtitle_language">
-                        <p *ngIf="addCard.get('subtitle_language')?.errors != null && addCard.get('subtitle_language')?.touched" class="alert invalid m-0 p-0">مطلوب</p>
-                      </div> -->
+                     
                     </div>
                     <div class="w-3 pe-0 pe-md-2 mb-3">
                         <label for="director" class="form-label">اخراج</label>

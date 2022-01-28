@@ -39,8 +39,8 @@ export class AddcardComponent implements OnInit, OnDestroy {
     production_year: new FormControl(null, [Validators.required]),
     duration: new FormControl(null, [Validators.required]),
     category: new FormControl(null, [Validators.required]),
-    Original_language: new FormControl('english', [Validators.required]),
-    subtitle_language: new FormControl('arabic', [Validators.required]),
+    Original_language: new FormControl('الانجليزية', [Validators.required]),
+    subtitle_language: new FormControl('العربية', [Validators.required]),
     director: new FormControl(null, [Validators.required]),
     evaluation: new FormControl(null, [
       Validators.required,
@@ -79,13 +79,13 @@ export class AddcardComponent implements OnInit, OnDestroy {
               res.data.Original_language
             );
             //  console.log(this.profile.nativeElement.value) ;
-            if (this.addCard.controls['Original_language'].value == 'arabic') {
+            if (this.addCard.controls['Original_language'].value == 'العربية') {
               this.orginalChoosenLanguage = false;
             }
             this.addCard.controls['subtitle_language'].setValue(
               res.data.subtitle_language
             );
-            if (this.addCard.controls['subtitle_language'].value == 'english') {
+            if (this.addCard.controls['subtitle_language'].value == 'الانجليزية') {
               this.subtitleChoosenLanguage = true;
             }
             this.addCard.controls['director'].setValue(res.data.director);
